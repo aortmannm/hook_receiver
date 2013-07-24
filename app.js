@@ -1,10 +1,17 @@
 var express = require('express');
 var app = express();
 
-var wanted_branch = process.argv[3];
-var port = process.argv[2];
 
-console.log('Hook receiver is listening on port: ' +port+ ' and it\'s listening on branch: ' +wanted_branch);
+var port = process.argv[2];
+var hook_every_branch = 'refs/heads/*'
+
+console.log('Hook receiver is listening on port: ' +port+ ' and it\'s listening on branch: ' +process.argv[3]);
+
+if(process.argv[3] == null){
+	wanted_branch = 'refs/heads/*'
+} else {
+	wanted_branch = 'refs/heads/' + process.argv[3];
+}
 
 app.use(express.bodyParser());
 
@@ -32,7 +39,7 @@ console.log('Listening on ' + port);
 
 
 var give_back_when_right_branch = function(wanted_branch, hook_branch) {	
-	if(wanted_branch == hook_branch){
+	if((wanted_branch == hook_branch) || (wanted_branch == hook_every_branch)){
 		return true;
 	} else {
 		return false;
