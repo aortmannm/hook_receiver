@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var spawn = require('child_process').spawn;
+var exec = require('child_process').exec;
 
 
 var port = process.argv[2];
@@ -44,6 +44,15 @@ var give_back_when_right_branch = function(wanted_branch, hook_branch) {
 }
 
 var do_your_tasks = function() {
-	var shellSyntaxCommand = 'ls';
-	spawn('sh', ['-c', shellSyntaxCommand], {stdio: 'inhert' });
+	var child;
+	var command = "dir";
+ 
+	child = exec(command, function (error, stdout, stderr) {
+  console.log('stdout:\n' + stdout);
+  console.error('stderr:\n' + stderr);
+  if (error !== null) {
+    console.error('exec error: ' + error);
+  }
+});
+	
 }
