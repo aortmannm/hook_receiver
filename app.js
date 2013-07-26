@@ -18,6 +18,8 @@ console.log('Hook receiver is listening on port: ' +port+ ' and it\'s listening 
 
 console.log(JSON.stringify(config.tasks));
 
+console.log(config.tasks[1]);
+
 //tasksToProgress();
 
 if(process.argv[3] == null){
@@ -32,10 +34,11 @@ app.post('/recipes', function(request, response){
 
 	var rightBranch = checkIfItsCorrectBranch(chosenBranch, request.body['ref']);
 
-	console.log(rightBranch);
+	
+ 	
 
-	if(rightBranch && JSON.parse(request.body['ref'])) {
-		for (var i = 0; i <= config.tasks.length; i++) {
+	if(rightBranch && JSON.parse(JSON.stringify(request.body))) {
+		for (var i = 0; i < config.tasks.length; i++) {
 			tasksToProgress(config.tasks[i]);
 		};
 		
@@ -56,16 +59,16 @@ var checkIfItsCorrectBranch = function(chosenBranch, hookBranch) {
 	}
 }
 
-var tasksToProgress = function() {
+var tasksToProgress = function(command) {
 	var child;
 
  
 	child = exec(command, function (error, stdout, stderr) {
-  console.log('stdout:\n' + stdout);
-  console.error('stderr:\n' + stderr);
-  if (error !== null) {
-    console.error('exec error: ' + error);
-  }
+	console.log('stdout:\n' + stdout);
+	console.error('stderr:\n' + stderr);
+	if (error !== null) {
+    	console.error('exec error: ' + error);
+	}
 });
 
 }
