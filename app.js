@@ -1,31 +1,44 @@
 var express = require('express');
 var app = express();
 var exec = require('child_process').exec;
+var fs = require('fs');
+var path = require('path');
 
 
 var port = process.argv[2];
-var hook_every_branch = 'refs/heads/*'
+var hookOnAllBranches = 'refs/heads/*'
+var command = '';
+
+var configFile = fs.readdirSync(process.cwd() + '/config');
+configFile = path.join(process.cwd() +'/config/' + configFile);
+var config = require(configFile);
+
 
 console.log('Hook receiver is listening on port: ' +port+ ' and it\'s listening on branch: ' +process.argv[3]);
 
-//do_your_tasks();
+console.log(JSON.stringify(config.tasks));
+
+//tasksToProgress();
 
 if(process.argv[3] == null){
-	wanted_branch = 'refs/heads/*'
+	chosenBranch = 'refs/heads/*'
 } else {
-	wanted_branch = 'refs/heads/' + process.argv[3];
+	chosenBranch = 'refs/heads/' + process.argv[3];
 }
 
 app.use(express.bodyParser());
 
 app.post('/recipes', function(request, response){
 
-	var right_body = give_back_when_right_branch(wanted_branch, request.body['ref']);
+	var rightBranch = checkIfItsCorrectBranch(chosenBranch, request.body['ref']);
 
-	console.log(right_body);
+	console.log(rightBranch);
 
-	if(right_body) {
-		do_your_tasks();
+	if(rightBranch && JSON.parse(request.body['ref'])) {
+		for (var i = 0; i <= config.tasks.length; i++) {
+			tasksToProgress(config.tasks[i]);
+		};
+		
 	}
 
 	response.send(request.body);    // echo the result back
@@ -35,17 +48,17 @@ app.listen(port);
 
 
 
-var give_back_when_right_branch = function(wanted_branch, hook_branch) {	
-	if((wanted_branch == hook_branch) || (wanted_branch == hook_every_branch)){
+var checkIfItsCorrectBranch = function(chosenBranch, hookBranch) {	
+	if((chosenBranch == hookBranch) || (chosenBranch == hookOnAllBranches)){
 		return true;
 	} else {
 		return false;
 	}
 }
 
-var do_your_tasks = function() {
+var tasksToProgress = function() {
 	var child;
-	var command = "dir";
+
  
 	child = exec(command, function (error, stdout, stderr) {
   console.log('stdout:\n' + stdout);
@@ -54,5 +67,5 @@ var do_your_tasks = function() {
     console.error('exec error: ' + error);
   }
 });
-	
+
 }
