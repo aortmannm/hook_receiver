@@ -1,5 +1,11 @@
 ### A simple hook receiver for git or github
 
+
+###### Install dependencies
+``` bash
+npm install
+```
+
 ###### Start app with
 ``` bash
 node app.js <port> <branch>
