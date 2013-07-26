@@ -16,11 +16,12 @@ var config = require(configFile);
 
 console.log('Hook receiver is listening on port: ' +port+ ' and it\'s listening on branch: ' +process.argv[3]);
 
-// console.log(JSON.stringify(config.tasks));
+var cb = function(){
+	if(counter < config.tasks.length){
+		tasksToProgress(config.tasks[counter], cb)
+	}
+}
 
-// console.log(config.tasks[1]);
-
-//tasksToProgress();
 
 if(process.argv[3] == null){
 	chosenBranch = 'refs/heads/*'
@@ -38,12 +39,7 @@ app.post('/recipes', function(request, response){
  	
 
 
-var cb = function(){
-	if(counter < config.tasks.length){
-		tasksToProgress(config.tasks[counter], cb)
-		}
-	}
-}
+	
 
 	if(rightBranch && JSON.parse(JSON.stringify(request.body))) {
 		tasksToProgress(config.tasks[counter], cb);
@@ -77,6 +73,6 @@ var tasksToProgress = function(command, cb) {
 	}
 	cb();
 });
-
+}
 
 
