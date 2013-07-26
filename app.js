@@ -3,6 +3,7 @@ var app = express();
 var exec = require('child_process').exec;
 var fs = require('fs');
 var path = require('path');
+var async = require('async');
 
 
 var port = process.argv[2];
@@ -36,12 +37,10 @@ app.post('/recipes', function(request, response){
 
 	
  	
+var counter = 0;
 
 	if(rightBranch && JSON.parse(JSON.stringify(request.body))) {
-		for (var i = 0; i < config.tasks.length; i++) {
-			tasksToProgress(config.tasks[i]);
-		};
-		
+		tasksToProgress(config.tasks[counter]);
 	}
 
 	response.send(request.body);    // echo the result back
@@ -59,16 +58,25 @@ var checkIfItsCorrectBranch = function(chosenBranch, hookBranch) {
 	}
 }
 
-var tasksToProgress = function(command) {
-	var child;
 
- 
+var tasksToProgress = function(command, cb) {
+	counter++;
+
+	var child;
 	child = exec(command, function (error, stdout, stderr) {
 	console.log('stdout:\n' + stdout);
 	console.error('stderr:\n' + stderr);
 	if (error !== null) {
     	console.error('exec error: ' + error);
 	}
+	cb();
 });
 
+
+
+var cb = function(){
+	if(counter < config.tasks.length){
+		tasksToProgress(config.tasks[counter], cb)
+		}
+	}
 }
