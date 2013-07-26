@@ -9,6 +9,12 @@ var port = process.argv[2];
 var hookOnAllBranches = 'refs/heads/*'
 var command = '';
 
+if(process.argv[3] == null){
+	chosenBranch = 'refs/heads/*'
+} else {
+	chosenBranch = 'refs/heads/' + process.argv[3];
+}
+
 var configFile = fs.readdirSync(process.cwd() + '/config');
 configFile = path.join(process.cwd() +'/config/' + configFile);
 var config = require(configFile);
@@ -23,11 +29,7 @@ var cb = function(){
 }
 
 
-if(process.argv[3] == null){
-	chosenBranch = 'refs/heads/*'
-} else {
-	chosenBranch = 'refs/heads/' + process.argv[3];
-}
+
 
 app.use(express.bodyParser());
 
@@ -71,6 +73,7 @@ var tasksToProgress = function(command, cb) {
 	if (error !== null) {
     	console.error('exec error: ' + error);
 	}
+	child.
 	cb();
 });
 }
