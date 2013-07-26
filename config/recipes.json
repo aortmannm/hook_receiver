@@ -1,7 +1,7 @@
 {
   "tasks": [
     "git clone git@packagedev.curasystems.com:chef_recipes.git",
-        "cd /opt/chef_recipes/; git pull",
-        "cd /opt/chef_recipes/smartos_cookbooks; tar zcvf /opt/chef_recipes/chef-solo-server/smartos/bootstrap/smartos_cookbooks.tar.gz cookbooks"
+    "cd /opt/chef_recipes/; git pull",
+    "cd /opt/chef_recipes/smartos_cookbooks; tar zcvf /opt/chef_recipes/chef-solo-server/smartos/bootstrap/smartos_cookbooks.tar.gz cookbooks"
     ]
 }
