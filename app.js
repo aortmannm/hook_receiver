@@ -30,7 +30,7 @@ if(process.argv[3] == null){
 
 app.use(express.bodyParser());
 
-app.post('/' + configFile, function(request, response){
+app.post('/recipes', function(request, response){
 
 	var rightBranch = checkIfItsCorrectBranch(chosenBranch, request.body['ref']);
 
