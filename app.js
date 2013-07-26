@@ -3,9 +3,8 @@ var app = express();
 var exec = require('child_process').exec;
 var fs = require('fs');
 var path = require('path');
-var async = require('async');
 
-
+var counter = 0;
 var port = process.argv[2];
 var hookOnAllBranches = 'refs/heads/*'
 var command = '';
@@ -37,10 +36,17 @@ app.post('/recipes', function(request, response){
 
 	
  	
-var counter = 0;
+
+
+var cb = function(){
+	if(counter < config.tasks.length){
+		tasksToProgress(config.tasks[counter], cb)
+		}
+	}
+}
 
 	if(rightBranch && JSON.parse(JSON.stringify(request.body))) {
-		tasksToProgress(config.tasks[counter]);
+		tasksToProgress(config.tasks[counter], cb);
 	}
 
 	response.send(request.body);    // echo the result back
@@ -74,9 +80,3 @@ var tasksToProgress = function(command, cb) {
 
 
 
-var cb = function(){
-	if(counter < config.tasks.length){
-		tasksToProgress(config.tasks[counter], cb)
-		}
-	}
-}
