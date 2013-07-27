@@ -22,13 +22,6 @@ var config = require(configFile);
 console.log('Hook receiver is listening on port: ' +port+ ' and it\'s listening on branch: ' +process.argv[3]);
 
 
-var cb = function(){
-	if(counter < config.tasks.length){
-		tasksToProgress(config.tasks[counter], cb)
-	} else {
-		counter = 0;
-	}
-}
 
 
 
@@ -40,6 +33,13 @@ app.post('/recipes', function(request, response){
 
 	
  	
+	var cb = function(){
+		if(counter < config.tasks.length){
+			tasksToProgress(config.tasks[counter], cb)
+		} else {
+			counter = 0;
+		}
+	}
 
 
 	
