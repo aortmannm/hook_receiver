@@ -1,6 +1,6 @@
 {
   "tasks": [
-    "git clone git@github.com:aortmannm/hook_receiver.git",
-    "git pull"
+    "dir",
+    "dir"
     ]
 }

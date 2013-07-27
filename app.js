@@ -19,15 +19,16 @@ var configFile = fs.readdirSync(process.cwd() + '/config');
 configFile = path.join(process.cwd() +'/config/' + configFile);
 var config = require(configFile);
 
-
 console.log('Hook receiver is listening on port: ' +port+ ' and it\'s listening on branch: ' +process.argv[3]);
+
 
 var cb = function(){
 	if(counter < config.tasks.length){
 		tasksToProgress(config.tasks[counter], cb)
+	} else {
+		counter = 0;
 	}
 }
-
 
 
 
@@ -65,7 +66,7 @@ var checkIfItsCorrectBranch = function(chosenBranch, hookBranch) {
 
 var tasksToProgress = function(command, cb) {
 	counter++;
-
+	console.log(config);
 	var child;
 	child = exec(command, function (error, stdout, stderr) {
 	console.log('stdout:\n' + stdout);
@@ -73,7 +74,7 @@ var tasksToProgress = function(command, cb) {
 	if (error !== null) {
     	console.error('exec error: ' + error);
 	}
-	child.
+	// child.
 	cb();
 });
 }
