@@ -21,17 +21,11 @@ var config = require(configFile);
 
 console.log('Hook receiver is listening on port: ' +port+ ' and it\'s listening on branch: ' +process.argv[3]);
 
-
-
-
-
 app.use(express.bodyParser());
 
 app.post('/recipes', function(request, response){
 
 	var rightBranch = checkIfItsCorrectBranch(chosenBranch, request.body['ref']);
-
-	
  	
 	var cb = function(){
 		if(counter < config.tasks.length){
@@ -40,9 +34,6 @@ app.post('/recipes', function(request, response){
 			counter = 0;
 		}
 	}
-
-
-	
 
 	if(rightBranch && JSON.parse(JSON.stringify(request.body))) {
 		tasksToProgress(config.tasks[counter], cb);
@@ -66,7 +57,6 @@ var checkIfItsCorrectBranch = function(chosenBranch, hookBranch) {
 
 var tasksToProgress = function(command, cb) {
 	counter++;
-	console.log(config);
 	var child;
 	child = exec(command, function (error, stdout, stderr) {
 	console.log('stdout:\n' + stdout);
