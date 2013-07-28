@@ -13,16 +13,19 @@ node app.js <port> <branch>
 
 When you don't take a branch on which the receiver should react it will react on all branches.
 
-Create Hook in github or gitlab 
+Create a hook in github or gitlab 
 
 Example:
 
 ``` bash
-http://192.168.1.145:8001/recipes
+http://192.168.1.145:8001/sample
 ```
 
-You need to take recipes at the end or you have to change it in app.js too.
+For that example you need to take the sample.json if u create a hook_receiver.json u need to create a hook like this:
 
-It will comming soon that more hooks can be done with different endings.
+``` bash
+http://192.168.1.145:8001/hook_receiver
+```
 
-#### Edit recipes.json with your commands you want to have
+
+#### Edit sample.json with your commands you want to have
