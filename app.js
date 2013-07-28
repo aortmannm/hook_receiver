@@ -15,15 +15,43 @@ if(process.argv[3] == null){
 	chosenBranch = 'refs/heads/' + process.argv[3];
 }
 
-var configFile = fs.readdirSync(process.cwd() + '/config');
-configFile = path.join(process.cwd() +'/config/' + configFile);
-var config = require(configFile);
+
+
+// var configFile = fs.readdirSync(process.cwd() + '/config');
+// configFile = path.join(process.cwd() +'/config/' + configFile);
+// var config = require(configFile);
+
+var configPath = __dirname  +'/config/';
+
+var availableConfigFiles = fs.readdirSync(configPath);
+
+console.log(availableConfigFiles[0]);
+
+console.log(availableConfigFiles[0].split(".")[0]);
+
+if(availableConfigFiles[0].split(".")[0] == 'geil'){
+	console.log('it seems to work');
+} else {
+	console.log('not really');
+}
+
+
+
+console.log(configPath);
 
 console.log('Hook receiver is listening on port: ' +port+ ' and it\'s listening on branch: ' +process.argv[3]);
 
 app.use(express.bodyParser());
 
-app.post('/recipes', function(request, response){
+app.post('*', function(request, response){
+
+	if(request.method == 'POST' && config.tasks[request.url]) {
+		request.url = request.url.slice(1);
+		console.log(request.url);
+	}
+
+	// var urlWithoutSlash = urlWithSlash.toString().replace(/\{([\w\.]+)\}/g);
+	// console.log(urlWithoutSlash);
 
 	var rightBranch = checkIfItsCorrectBranch(chosenBranch, request.body['ref']);
  	
