@@ -1,17 +1,18 @@
-### A simple hook receiver for git or github
+# A simple hook receiver for git or github
 
 
-###### Install dependencies
+## Install dependencies
+
 ``` bash
-npm install
+npm install -g
 ```
 
-###### Start app with
+## Start app with
 ``` bash
-node app.js <port> <branch>
+gitlab-hook-receiver <port> --branch <branch>
 ```
 
-When you don't take a branch on which the receiver should react it will react on all branches.
+When you don't specify a branch it will default to ALL branches
 
 Create a hook in github or gitlab 
 
@@ -28,4 +29,4 @@ http://192.168.1.145:8001/hook_receiver
 ```
 
 
-#### Edit sample.json with your commands you want to have
+## Edit sample.json with your commands you want to have
