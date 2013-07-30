@@ -1,13 +1,16 @@
 var path = require('path');
 var receiver = require('./lib/receiver.js');
 
-var port = process.argv[2];
+var program = require('commander');
 
-var monitoredBranchName = '*';
-if(process.argv[3]){
-  monitoredBranchName = process.argv[3];
-}
+program
+  .version('0.0.1')
+  .option('-p, --port', 'specify port')
+  .parse(process.argv);
 
+console.log(program.port);
+
+var port = program.port;
 
 var configs = path.join(process.cwd(), 'config');
-receiver.start(port,configs,monitoredBranchName);
+receiver.start(port,configs);

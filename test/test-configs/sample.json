@@ -4,6 +4,7 @@
   ],
   "commands": [
     "dir",
+    "ls",
     "dir"
     ]
 }
