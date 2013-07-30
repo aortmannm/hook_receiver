@@ -3,11 +3,11 @@
 var request = require('superagent');
 
 var Receiver = require('../lib/receiver');
-Receiver.start( 8789, __dirname+'/test-configs' );
+Receiver.start( 8001, __dirname+'/test-configs/', 'master');
 
 
 request
-  .post('http://localhost:8789/....')
+  .post('http://localhost:8001/sample')
   .send({ ref: 'refs/head/master' })
   .end(function(error, res){
     console.log('OK');

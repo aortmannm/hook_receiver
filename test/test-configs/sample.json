@@ -1,6 +1,9 @@
 {
+  "branch": [
+    "refs/heads/master"
+  ],
   "commands": [
-    "cd /opt; git clone https://github.com/aortmannm/hook_receiver.git",
-    "cd /opt/hook_receiver; git pull"
+    "dir",
+    "dir"
     ]
 }
