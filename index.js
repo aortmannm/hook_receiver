@@ -5,10 +5,8 @@ var program = require('commander');
 
 program
   .version('0.0.1')
-  .option('-p, --port', 'specify port')
+  .option('-p, --port <>', 'specify port')
   .parse(process.argv);
-
-console.log(program.port);
 
 var port = program.port;
 
