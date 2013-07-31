@@ -4,7 +4,7 @@ var receiver = require('./lib/receiver.js');
 var program = require('commander');
 
 program
-  .version('0.0.1')
+  .version('0.0.3')
   .option('-p, --port <port>', 'specify port')
   .parse(process.argv);
 

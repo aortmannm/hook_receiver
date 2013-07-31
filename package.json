@@ -1,15 +1,25 @@
 {
   "name": "hook_receiver",
-  "description": "hook_receiver",
-  "version": "0.0.1",
-  "private": true,
+  "description": "Node.JS hook receiver for gitlab and github",
+  "version": "0.0.3",
+  "main": "index.js",
   "dependencies": {
     "express": "3.x",
     "superagent": "0.15.4",
     "commander": "*"
   },
-   "devDependencies": {
+  "devDependencies": {
     "express": "~3.1.1",
     "cura-test-runner": "0.0.3"
-  }
+  },
+  "repository": "https://github.com/aortmannm/hook_receiver.git",
+  "keywords": [
+    "git",
+    "hook",
+    "receiver",
+    "gitlab",
+    "github"
+  ],
+  "author": "Adrian Ortmann",
+  "license": "BSD"   
 }
