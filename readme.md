@@ -4,15 +4,15 @@
 ## Install dependencies
 
 ``` bash
-npm install -g
+npm install
 ```
 
-## Start app with
+## Start receiver with
 ``` bash
-gitlab-hook-receiver <port> --branch <branch>
+node index.js -p <port>
 ```
 
-When you don't specify a branch it will default to ALL branches
+Specify branch in the .json file in your config folder.
 
 Create a hook in github or gitlab 
 
@@ -29,4 +29,4 @@ http://192.168.1.145:8001/hook_receiver
 ```
 
 
-## Edit sample.json with your commands you want to have
+## Edit sample.json with your commands and branch you want to have
